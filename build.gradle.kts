@@ -1,8 +1,8 @@
-import org.hypertrace.gradle.publishing.License.AGPL_V3
+import org.hypertrace.gradle.publishing.License.APACHE_2_0
 
 plugins {
-  id("org.hypertrace.publish-plugin") version "0.1.0"
-  id("org.hypertrace.ci-utils-plugin") version "0.1.0"
+  id("org.hypertrace.publish-plugin") version "0.3.1"
+  id("org.hypertrace.ci-utils-plugin") version "0.1.1"
   `java-gradle-plugin`
 }
 
@@ -43,5 +43,5 @@ dependencies {
 }
 
 hypertracePublish {
-  license.set(AGPL_V3)
+  license.set(APACHE_2_0)
 }

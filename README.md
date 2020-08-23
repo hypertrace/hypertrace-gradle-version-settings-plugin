@@ -64,7 +64,7 @@ and patch components will be reset.
 
 #### Default versioning rules
 These are specified in `semantic-build-versioning.gradle`. The prerelease feature, unlike in previous iterations, is no
-longer being used in the default pattern. It is expected that all releases are occuring off master and are releasable.
+longer being used in the default pattern. It is expected that all releases are occuring off main and are releasable.
 The (optional) expected commit format is based on https://www.conventionalcommits.org/en/v1.0.0/#summary
 ```
 <type>[(scope)][!]: <description>

@@ -32,11 +32,11 @@ dependencies {
     implementation("commons-codec:commons-codec:1.13") {
       because("version 1.12 has a vulnerability https://snyk.io/vuln/SNYK-JAVA-COMMONSCODEC-561518")
     }
-  }
-
-  constraints {
     implementation("org.apache.httpcomponents:httpclient:4.5.12") {
       because("version 4.3.6 has a vulnerability https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEHTTPCOMPONENTS-31517")
+    }
+    implementation("org.eclipse.jgit:org.eclipse.jgit:5.10.0.202012080955-r") {
+      because("provided jgit required cloned submodules https://bugs.eclipse.org/bugs/show_bug.cgi?id=467631")
     }
   }
 

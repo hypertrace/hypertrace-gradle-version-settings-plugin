@@ -1,5 +1,8 @@
 package org.hypertrace.gradle.versioning;
 
+import static java.util.Objects.nonNull;
+import static org.gradle.api.Project.DEFAULT_VERSION;
+
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,6 +10,7 @@ import java.nio.file.Paths;
 import net.vivin.gradle.versioning.SemanticBuildVersioningPlugin;
 import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
+import org.gradle.api.Project;
 import org.gradle.api.initialization.ProjectDescriptor;
 import org.gradle.api.initialization.Settings;
 
@@ -43,6 +47,19 @@ public class HypertraceVersionSettingsPlugin implements Plugin<Settings> {
   private void propagateVersionToAllProjects(Settings settings) {
     settings
         .getGradle()
-        .allprojects(project -> project.setVersion(project.getRootProject().getVersion()));
+        .allprojects(project -> project.setVersion(this.resolveProjectVersion(project)));
+  }
+
+  private Object resolveProjectVersion(Project project) {
+    // If version overridden, use it
+    if (project.getVersion() != DEFAULT_VERSION) {
+      return project.getVersion();
+    }
+    // Else use parent's version
+    if (nonNull(project.getParent())) {
+      return this.resolveProjectVersion(project.getParent());
+    }
+    // Unexpected. No version and we've reached root, throw
+    throw new GradleException("No version set for root project");
   }
 }
